@@ -481,9 +481,11 @@
 	    <xsl:choose>
 		<xsl:when test="descendant::CdtnComplianceStatus/@OptionText or not(descendant::CdtnComplianceStatus/@OptionText='')">
 		  <xsl:variable name="index" select="@Index"/>
+          <p style="line-height:3px;"></p>
 		  <xsl:value-of select="substring-before(//FormData/ConditionRptr/Item[@Index=[$index]]/Heading,'|')"/>
 		  <xsl:text>| </xsl:text>
 		  <xsl:value-of select="descendant::CdtnComplianceStatus/@OptionText"/><xsl:text>&#xd;</xsl:text>
+          <p style="font-family: 'Calibri', sans-serif; font-size: 3pt;"></p>
 		  <xsl:value-of select="descendant::ConditionText[1]/text()"/>
 		</xsl:when>
 		</xsl:choose>
@@ -501,7 +503,7 @@
 		</xsl:for-each>
 	  </xsl:when>
 	  <xsl:when test="@Name = 'ACTION'">
-		<xsl:value-of select="descendant::*[@Description='TO BE UNDERTAKEN BY']/@OptionText"/>
+		<xsl:value-of select="descendant::*[contains(name(),'ActionConductor')]/@OptionText"/>
 		<xsl:text> by </xsl:text>
 		<xsl:value-of select="descendant::*[@Description='TARGET DATE']/@DisplayValue"/>
 		<xsl:text> | </xsl:text>
@@ -515,7 +517,7 @@
 		<xsl:otherwise>
 		  <xsl:value-of select="format-number(descendant::ServiceTimeRecordHours/text(),'#0.00')"/>
 		  <xsl:text> | </xsl:text>
-		  <xsl:value-of select="descendant::ServiceType/@OptionText"/>
+		  <xsl:value-of select="descendant::ServiceTimeCode/@OptionText"/>
 		</xsl:otherwise>
 		</xsl:choose>
 	  </xsl:when>
